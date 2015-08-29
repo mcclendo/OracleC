@@ -42,3 +42,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /Debug/
+
+# Binary executable files
+*.o
+*.out
+*.so
+*.dll
+*.exe
