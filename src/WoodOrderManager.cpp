@@ -64,21 +64,22 @@ void WoodOrderManager::initializeData(const std::string& inputFile) {
     };
 
     if(ifs.is_open()) {
+
+        std::string orderDelim(";");
+        std::string itemDelim(":");
         std::string token;
 
+    while(std::getline(ifs, line)) {
+        std::cout << "read = " << line << " =================" << std::endl;
         tokens.clear();
-        std::getline(ifs, line);
-        
-        std::string delim(";");
-        std::string itemDelim(":");
 
-        lambda(line, delim, tokens);
+        lambda(line, orderDelim, tokens);
 
         std::unique_ptr<WoodOrder> order(new WoodOrder(tokens[0], tokens[1], tokens[2]));
         tokens.clear();
 
         std::getline(ifs, line);
-        lambda(line, delim, tokens);
+        lambda(line, orderDelim, tokens);
 
         for(auto& item : tokens) {
             std::vector<std::string> itemTokens;
@@ -93,6 +94,8 @@ void WoodOrderManager::initializeData(const std::string& inputFile) {
 
         _orders.push_back(std::move(order));
 
+
+        }
         std::stringstream ss;
         orderReport(ss);
 
@@ -104,7 +107,6 @@ void WoodOrderManager::initializeData(const std::string& inputFile) {
 }
 
 void WoodOrderManager::orderReport(std::stringstream &ss) const {
-    uint32_t totalPriceInCents = 0;
     uint32_t orderNum = 1;
 
     auto dollars = [](uint32_t cents) {
@@ -128,6 +130,7 @@ void WoodOrderManager::orderReport(std::stringstream &ss) const {
     ss << "#### Begin Report ####" << std::endl;
     std::string orderSeparator("---------------------------------------------------------");
     for(auto& order : _orders) {
+        uint32_t totalPriceInCents = 0;
         ss << "Order #" << orderNum++ << std::endl
             << orderSeparator << std::endl
             << "Customer: " << order->getCustomerName() << std::endl
