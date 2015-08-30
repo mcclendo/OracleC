@@ -8,6 +8,7 @@
 #include <memory>
 #include <map>
 #include <sstream>
+#include <stdexcept>
 
 class WoodOrderManager {
 public:
@@ -23,5 +24,9 @@ private:
     std::vector<std::unique_ptr<WoodOrder>> _orders;
     std::map<std::string, WoodItem> _woodItems;
 
+};
+
+struct WoodOrderManagerException : public std::runtime_error {
+    WoodOrderManagerException(const std::string& msg) : std::runtime_error(msg){};
 };
 #endif

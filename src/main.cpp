@@ -10,8 +10,15 @@ int main(int argc, char *argv[]) {
         exit(-1);
     }
 
-    WoodOrderManager manager;
+    std::string filename(argv[1]);
 
-    manager.initializeData("input.txt");
+    try {
+        WoodOrderManager manager;
+        manager.initializeData(filename);
+    }
+    catch(WoodOrderManagerException &e) {
+        std::cout << "An error occurred: " << e.what() << std::endl;
+    }
+
     return 0;
 }

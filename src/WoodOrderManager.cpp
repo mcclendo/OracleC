@@ -4,8 +4,6 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <cstdint>
-#include <stdexcept>
 
 static double calculateDeliveryTimeMultiplier(uint32_t bf) {
     double multiplier = 0;
@@ -22,7 +20,7 @@ static double calculateDeliveryTimeMultiplier(uint32_t bf) {
     else if(bf <= 1000)
         multiplier = 5.5;
     else
-        throw std::runtime_error("Board Feet must be <= 1000.");
+        throw WoodOrderManagerException("Board Feet must be <= 1000.");
 }
 
 WoodOrderManager::WoodOrderManager() : _orders() {
@@ -86,15 +84,14 @@ void WoodOrderManager::initializeData(const std::string& inputFile) {
             std::vector<std::string> itemTokens;
             lambda(item, itemDelim, itemTokens);
 
+            if(_woodItems.count(itemTokens[0]) == 0)
+                throw WoodOrderManagerException("Unknown wood type '" + itemTokens[0] + "'.");
+
             order->addItem(itemTokens[0], std::stoi(itemTokens[1], nullptr));
         }
 
 
         _orders.push_back(std::move(order));
-
-        /*std::cout << "Here are the values ..." << std::endl;
-        for(auto& t : tokens)
-            std::cout << t << std::endl;*/
 
         std::stringstream ss;
         orderReport(ss);
@@ -102,7 +99,7 @@ void WoodOrderManager::initializeData(const std::string& inputFile) {
         std::cout << ss.str() << std::endl;
     }
     else {
-        throw std::runtime_error("Could not open input file '" + inputFile + ".");
+        throw WoodOrderManagerException("Could not open input file '" + inputFile + ".");
     }
 }
 
