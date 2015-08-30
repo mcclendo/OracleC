@@ -4,6 +4,7 @@
 #include "WoodCommon.hpp"
 #include "WoodOrderDetail.hpp"
 
+#include <string>
 #include <functional>
 #include <memory>
 #include <vector>
@@ -16,7 +17,7 @@ public:
     inline std::string getAddress() const { return _address; }
     inline std::string getDate() const { return _date; }
 
-    void addItem(WoodItem& woodItem, uint32_t quantity);
+    void addItem(const std::string& woodType, uint32_t quantity);
     inline uint32_t itemCount() const { return static_cast<uint32_t>(_lineItems.size()); }
     void forEach(std::function<void(const WoodOrderDetail&)> iteratorFn) const;
 

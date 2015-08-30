@@ -12,5 +12,6 @@ int main(int argc, char *argv[]) {
 
     WoodOrderManager manager;
 
+    manager.initializeData("input.txt");
     return 0;
 }

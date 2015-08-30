@@ -5,8 +5,8 @@ WoodOrder::WoodOrder(std::string& customerName, std::string& address, std::strin
 
 }
 
-void WoodOrder::addItem(WoodItem& woodItem, uint32_t quantity) {
-    std::unique_ptr<WoodOrderDetail> item(new WoodOrderDetail(woodItem, quantity));
+void WoodOrder::addItem(const std::string& woodType, uint32_t quantity) {
+    std::unique_ptr<WoodOrderDetail> item(new WoodOrderDetail(woodType, quantity));
 
     _lineItems.push_back(std::move(item));
 }

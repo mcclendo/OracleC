@@ -7,7 +7,8 @@
 
 class WoodItem {
 public:
-	WoodItem(std::string& woodType, double baseDeliveryTimeInHours, uint32_t priceInCents);
+    WoodItem();
+	WoodItem(std::string woodType, double baseDeliveryTimeInHours, uint32_t priceInCents);
 
     inline std::string getWoodType() const { return _woodType; }
     inline double getBaseDeliveryTimeInHours() const { return _baseDeliveryTimeInHours; }

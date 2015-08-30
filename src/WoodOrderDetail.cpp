@@ -1,6 +1,6 @@
 #include "WoodOrderDetail.hpp"
 
-WoodOrderDetail::WoodOrderDetail(WoodItem &woodItem, uint32_t quantity)
-    : _woodItem(woodItem), _quantity(quantity) {
+WoodOrderDetail::WoodOrderDetail(const std::string& woodType, uint32_t bf)
+    : _woodType(woodType), _bf(bf) {
 
 }

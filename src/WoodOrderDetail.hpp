@@ -6,12 +6,12 @@
 
 class WoodOrderDetail {
 public:
-    WoodOrderDetail(WoodItem &woodItem, uint32_t quantity);
+    WoodOrderDetail(const std::string &woodType, uint32_t bf);
 
-    inline uint32_t getQuantity() const { return _quantity; }
-    inline WoodItem getWoodItem() const { return _woodItem; }
+    inline uint32_t getBoardFeet() const { return _bf; }
+    inline std::string getWoodType() const { return _woodType; }
 private:
-    WoodItem _woodItem;
-    uint32_t _quantity;
+    std::string _woodType;
+    uint32_t _bf;
 };
 #endif
