@@ -70,7 +70,6 @@ void WoodOrderManager::initializeData(const std::string& inputFile) {
         std::string token;
 
     while(std::getline(ifs, line)) {
-        std::cout << "read = " << line << " =================" << std::endl;
         tokens.clear();
 
         lambda(line, orderDelim, tokens);
