@@ -21,6 +21,8 @@ static double calculateDeliveryTimeMultiplier(uint32_t bf) {
         multiplier = 5.5;
     else
         throw WoodOrderManagerException("Board Feet must be <= 1000.");
+
+    return multiplier;
 }
 
 WoodOrderManager::WoodOrderManager() : _orders() {
