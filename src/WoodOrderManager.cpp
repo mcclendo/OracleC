@@ -64,41 +64,34 @@ void WoodOrderManager::initializeData(const std::string& inputFile) {
     };
 
     if(ifs.is_open()) {
-
         std::string orderDelim(";");
         std::string itemDelim(":");
         std::string token;
 
-    while(std::getline(ifs, line)) {
-        tokens.clear();
+        while(std::getline(ifs, line)) {
+            tokens.clear();
 
-        lambda(line, orderDelim, tokens);
+            lambda(line, orderDelim, tokens);
 
-        std::unique_ptr<WoodOrder> order(new WoodOrder(tokens[0], tokens[1], tokens[2]));
-        tokens.clear();
+            std::unique_ptr<WoodOrder> order(new WoodOrder(tokens[0], tokens[1], tokens[2]));
+            tokens.clear();
 
-        std::getline(ifs, line);
-        lambda(line, orderDelim, tokens);
+            std::getline(ifs, line);
+            lambda(line, orderDelim, tokens);
 
-        for(auto& item : tokens) {
-            std::vector<std::string> itemTokens;
-            lambda(item, itemDelim, itemTokens);
+            for(auto& item : tokens) {
+                std::vector<std::string> itemTokens;
+                lambda(item, itemDelim, itemTokens);
 
-            if(_woodItems.count(itemTokens[0]) == 0)
-                throw WoodOrderManagerException("Unknown wood type '" + itemTokens[0] + "'.");
+                if(_woodItems.count(itemTokens[0]) == 0)
+                    throw WoodOrderManagerException("Unknown wood type '" + itemTokens[0] + "'.");
 
-            order->addItem(itemTokens[0], std::stoi(itemTokens[1], nullptr));
+                order->addItem(itemTokens[0], std::stoi(itemTokens[1], nullptr));
+            }
+
+
+            _orders.push_back(std::move(order));
         }
-
-
-        _orders.push_back(std::move(order));
-
-
-        }
-        std::stringstream ss;
-        orderReport(ss);
-
-        std::cout << ss.str() << std::endl;
     }
     else {
         throw WoodOrderManagerException("Could not open input file '" + inputFile + ".");

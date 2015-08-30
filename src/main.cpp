@@ -15,6 +15,11 @@ int main(int argc, char *argv[]) {
     try {
         WoodOrderManager manager;
         manager.initializeData(filename);
+
+        std::stringstream ss;
+        manager.orderReport(ss);
+        std::cout << ss.str() << std::endl;
+
     }
     catch(WoodOrderManagerException &e) {
         std::cout << "An error occurred: " << e.what() << std::endl;
