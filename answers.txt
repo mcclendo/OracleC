@@ -7,6 +7,6 @@ d) HardwoodSellerC.cpp (1 time)
 e) "git log" shows information about previous commits and related messages.
    "git status" shows the current status of the working tree and how it
    differs from latest commit.
-f) git log --grep=transaction
-g) git log --author="Lauren" 
-h) git log --after="01/04/2015" --before="06/15/2015"
+f) git log --follow -p main.java
+g) git log --grep=transaction
+h) git log --author="Lauren" --after="01/04/2015" --before="06/15/2015"
